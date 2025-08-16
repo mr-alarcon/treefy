@@ -1,8 +1,3 @@
-links = [
-    "example/folder1/files/image.png" 
-]
-
-
 def add_segments_to_tree(current_tree, segments):
     for segmt in segments:
         if segmt not in current_tree:
@@ -19,8 +14,7 @@ def url_segments(url):
         return url_seg
 
 
-
-def build_directory_tree(links):
+def create_directory_tree(links):
     directory_tree = {}
 
     for link in links:
