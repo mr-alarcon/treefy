@@ -27,6 +27,3 @@ def create_main_banner():
                         ████
                       ▒▒████▒▒
                ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓""")
-
-
-create_main_banner()
