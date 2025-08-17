@@ -5,10 +5,15 @@ from urllib.parse import unquote
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-def get_url_list(url):
+def get_url_list(url, ssl_certified=False):
     urls_found = []
 
-    response = requests.get(url, verify=False, allow_redirects=False)
+    if ssl_certified:
+        response = requests.get(url, allow_redirects=False)
+
+    else:
+        response = requests.get(url, verify=False, allow_redirects=False)
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, "html.parser")
