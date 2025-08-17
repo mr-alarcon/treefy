@@ -14,7 +14,7 @@ parser.add_argument("-vc", "--verify-cert", action="store_true", help="Verify SS
 parser.add_argument("-sb", "--show-banner", action="store_true", help="Show main banner")
 parser.add_argument("-su", "--show-urls", action="store_true", help="Show URLs in the HTML source")
 parser.add_argument("-st", "--show-tree", action="store_true", help="Show directory tree")
-
+parser.add_argument("-em", "--emojis", action="store_true", help="Show directory tree emojis (folder/file)")
 
 
 args = parser.parse_args()
@@ -41,7 +41,11 @@ if args.show_urls:
 if args.show_tree:
     absolute_urls, relative_urls = split_path(urls)
     directory_tree = create_directory_tree(relative_urls)
-    show_tree(directory_tree)
+
+    if args.emojis:
+        show_tree(directory_tree, 1)
+    else:
+        show_tree(directory_tree, 2)
 
 
 
