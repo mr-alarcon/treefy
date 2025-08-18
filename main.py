@@ -7,15 +7,17 @@ from core.get_url_list import get_url_list
 from core.path_splitter import split_path
 from core.directory_tree import create_directory_tree
 
-parser = argparse.ArgumentParser(description="Get website tree")
+parser = argparse.ArgumentParser(description="Treefy by @mr-alarcon")
 
-parser.add_argument("-u", "--url", required=True, help="Enter URL")
-parser.add_argument("-vc", "--verify-cert", action="store_true", help="Verify SSL certified")
-parser.add_argument("-sb", "--show-banner", action="store_true", help="Show main banner")
-parser.add_argument("-su", "--show-urls", action="store_true", help="Show URLs in the HTML source")
-parser.add_argument("-st", "--show-tree", action="store_true", help="Show directory tree")
-parser.add_argument("-em", "--emojis", action="store_true", help="Show directory tree emojis (folder/file)")
+config_group = parser.add_argument_group("Configurations")
+config_group.add_argument("-u", "--url", required=True, help="Target URL")
+config_group.add_argument("-v", "--verify-cert", action="store_true", help="Verify SSL certificate")
 
+output_group = parser.add_argument_group("Outputs")
+output_group.add_argument("-b", "--banner", action="store_true", help="Show main banner")
+output_group.add_argument("-l", "--list-urls", action="store_true", help="List URLs found in the HTML source")
+output_group.add_argument("-t", "--tree", action="store_true", help="Show directory tree")
+output_group.add_argument("-e", "--emojis", action="store_true", help="Show emojis in the directory tree")
 
 args = parser.parse_args()
 
