@@ -16,3 +16,32 @@ def create_extensions_dict():
     ]
 
     return exts
+
+
+
+def create_categorize_extensios_dict():
+    critical_exts = [
+        "php", "asp", "aspx", "jsp", "cgi", "pl", "py", "rb",
+        "sh", "exe", "bin", "ps1",
+        "pem", "key", "crt", "p12", "pfx",
+        "env", "config", "ini", "yml", "yaml",
+        "htaccess", "htpasswd",
+        "git",
+        "inc", "tpl",
+        "log", "sql", "db",
+        "bak", "old", "zip", "rar"
+    ]
+
+    medium_exts = [
+        "js", "json", "xml",
+        "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"
+    ]
+
+    low_exts = [
+        "html", "htm", "css",
+        "jpg", "jpeg", "png", "gif", "svg", "webp", "ico",
+        "woff", "woff2", "ttf", "eot",
+        "mp4", "webm", "ogg", "mp3", "wav", "mov"
+    ]
+
+    return critical_exts, medium_exts, low_exts
