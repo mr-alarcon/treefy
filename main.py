@@ -20,6 +20,9 @@ output_group.add_argument("-e", "--emojis", action="store_true", help="Show emoj
 output_group.add_argument("-l", "--list-urls", action="store_true", help="List URLs found in the HTML source")
 output_group.add_argument("-t", "--tree", action="store_true", help="Show directory tree")
 output_group.add_argument("-f", "--files", action="store_true", help="Show files sumary")
+output_group.add_argument("-c", "--clone-tree", action="store_true", help="Make a local clone tree")
+output_group.add_argument("-s", "--scan-files", action="store_true", help="Scan code files to find vulnerabilities")
+output_group.add_argument("-o", "--output", action="store_true", help="Save output to file")
 
 args = parser.parse_args()
 
