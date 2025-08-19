@@ -72,7 +72,8 @@ if args.files:
 
 
 if args.clone_tree:
-    _, relative_urls = split_path(urls)
+    absolute_urls, relative_urls = split_path(urls)
     directory_tree = create_directory_tree(relative_urls)
-    create_local_clone_tree(directory_tree, args.clone_tree)
+    create_local_clone_tree(absolute_urls, directory_tree, args.clone_tree)
+    
 
