@@ -7,11 +7,12 @@ from core.get_url_list import get_url_list
 from core.get_file_list import get_file_list
 from core.path_splitter import split_path
 from core.directory_tree import create_directory_tree
+from core.local_clone_tree import create_local_clone_tree
 
 parser = argparse.ArgumentParser(description="Treefy by @mr-alarcon")
 
 config_group = parser.add_argument_group("Configurations")
-config_group.add_argument("-u", "--url", required=True, help="Target URL")
+config_group.add_argument("-u", "--url", metavar="URL", required=True, help="Target URL")
 config_group.add_argument("-v", "--verify-cert", action="store_true", help="Verify SSL certificate")
 
 output_group = parser.add_argument_group("Outputs")
@@ -20,7 +21,7 @@ output_group.add_argument("-e", "--emojis", action="store_true", help="Show emoj
 output_group.add_argument("-l", "--list-urls", action="store_true", help="List URLs found in the HTML source")
 output_group.add_argument("-t", "--tree", action="store_true", help="Show directory tree")
 output_group.add_argument("-f", "--files", action="store_true", help="Show files sumary")
-output_group.add_argument("-c", "--clone-tree", action="store_true", help="Make a local clone tree")
+output_group.add_argument("-c", "--clone-tree", metavar="PATH", type=str, help="Make a local clone tree")
 output_group.add_argument("-s", "--scan-files", action="store_true", help="Scan code files to find vulnerabilities")
 output_group.add_argument("-o", "--output", action="store_true", help="Save output to file")
 
@@ -70,9 +71,8 @@ if args.files:
         print("\n")
 
 
-
-
-
-
-
+if args.clone_tree:
+    _, relative_urls = split_path(urls)
+    directory_tree = create_directory_tree(relative_urls)
+    create_local_clone_tree(directory_tree, args.clone_tree)
 
