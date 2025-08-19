@@ -23,7 +23,7 @@ args = parser.parse_args()
 
 
 
-if args.show_banner:
+if args.banner:
     create_main_banner()
 
 
@@ -33,14 +33,14 @@ else:
     urls = get_url_list(args.url)
 
 
-if args.show_urls:
+if args.list_urls:
     absolute_urls, relative_urls = split_path(urls)
 
     for url in relative_urls:
         full_url = urljoin(args.url + "/", url)
         print(full_url)
 
-if args.show_tree:
+if args.tree:
     absolute_urls, relative_urls = split_path(urls)
     directory_tree = create_directory_tree(relative_urls)
 
