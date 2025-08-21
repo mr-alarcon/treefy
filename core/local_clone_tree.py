@@ -15,15 +15,15 @@ binary_requierd_exts = (
     "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"
 )
 
-def create_local_clone_tree(absolute_urls, tree, base_path, print_urls=True):
+def create_local_clone_tree(absolute_urls, tree, base_path, get_urls_flag=True):
     global url_files
     
     exts = create_extensions_dict()
 
-    if print_urls:
+    if get_urls_flag:
         url_files = get_url_files(absolute_urls)
 
-    for i, (key, value) in enumerate(tree.items()):
+    for key, value in enumerate(tree.items()):
         is_file = key.split("?")[0].endswith(tuple(f".{ext}" for ext in exts))
 
         current_path = Path(base_path) / key.split("?")[0]

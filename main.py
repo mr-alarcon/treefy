@@ -10,7 +10,7 @@ from core.path_splitter import split_path
 from core.directory_tree import create_directory_tree
 from core.local_clone_tree import create_local_clone_tree
 from core.save_output import save_output_file
-
+from core.scan_file import scan_files
 
 
 parser = argparse.ArgumentParser(description="Treefy by @mr-alarcon")
@@ -84,3 +84,6 @@ if args.clone_tree:
     create_local_clone_tree(absolute_urls, directory_tree, args.clone_tree)
     
 
+if args.scan_files:
+    absolute_urls, _ = split_path(urls)
+    scan_files(absolute_urls)
