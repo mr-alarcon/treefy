@@ -1,4 +1,5 @@
 import argparse
+import sys
 from urllib.parse import urljoin
 
 from cli.main_banner import create_main_banner
@@ -8,6 +9,9 @@ from core.get_file_list import get_file_list
 from core.path_splitter import split_path
 from core.directory_tree import create_directory_tree
 from core.local_clone_tree import create_local_clone_tree
+from core.save_output import save_output_file
+
+
 
 parser = argparse.ArgumentParser(description="Treefy by @mr-alarcon")
 
@@ -23,11 +27,14 @@ output_group.add_argument("-t", "--tree", action="store_true", help="Show direct
 output_group.add_argument("-f", "--files", action="store_true", help="Show files sumary")
 output_group.add_argument("-c", "--clone-tree", metavar="PATH", type=str, help="Make a local clone tree")
 output_group.add_argument("-s", "--scan-files", action="store_true", help="Scan code files to find vulnerabilities")
-output_group.add_argument("-o", "--output", action="store_true", help="Save output to file")
+output_group.add_argument("-o", "--output", metavar="FILE", type=str, help="Save output to file")
 
 args = parser.parse_args()
 
 
+
+if args.output:
+    sys.stdout = save_output_file(args.output)
 
 if args.banner:
     create_main_banner()
