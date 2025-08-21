@@ -1,12 +1,16 @@
 import sys
+import re
 
-def save_output_file(filename, mode="w"):
-    file = open(filename, mode, encoding="utf-8")
-    stdout_original = sys.stdout
+ANSI_ESCAPE = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
+
+def save_output_file(file_name):
+    file = open(file_name, "w", encoding="utf-8")
+    stdout_original = sys.__stdout__
 
     def write(data):
-        stdout_original.write(data) 
-        file.write(data)         
+        stdout_original.write(data)             
+        clean_data = ANSI_ESCAPE.sub('', data)
+        file.write(clean_data)                    
 
     def flush():
         stdout_original.flush()
@@ -14,4 +18,5 @@ def save_output_file(filename, mode="w"):
 
     sys.stdout.write = write
     sys.stdout.flush = flush
-    return file 
+
+    

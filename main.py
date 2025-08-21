@@ -34,7 +34,7 @@ args = parser.parse_args()
 
 
 if args.output:
-    sys.stdout = save_output_file(args.output)
+    save_output_file(args.output)
 
 if args.banner:
     create_main_banner()
