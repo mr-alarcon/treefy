@@ -1,9 +1,12 @@
+# Standard library imports
 import argparse
-import sys
-from urllib.parse import urljoin
 
-from cli.main_banner import create_main_banner
+# Local modules imports
+from cli.show_banner import show_banner
 from cli.show_tree import show_tree
+from cli.show_urls_list import show_urls_list
+from cli.show_file_sumary import show_file_sumary
+
 from core.get_url_list import get_url_list
 from core.get_file_list import get_file_list
 from core.path_splitter import split_path
@@ -13,6 +16,7 @@ from core.save_output import save_output_file
 from core.scan_file import scan_files
 
 
+# ---> Creation of CLI arguments to configure Treefy execution
 parser = argparse.ArgumentParser(description="Treefy by @mr-alarcon")
 
 config_group = parser.add_argument_group("Configurations")
@@ -32,58 +36,40 @@ output_group.add_argument("-o", "--output", metavar="FILE", type=str, help="Save
 args = parser.parse_args()
 
 
+# ---> Execute the corresponding functions based on the parsed CLI arguments
 
-if args.output:
-    save_output_file(args.output)
-
-if args.banner:
-    create_main_banner()
-
+# --- Verify SSL certified (True, False)
 if args.verify_cert:
     urls = get_url_list(args.url, True)
 else:
     urls = get_url_list(args.url)
 
+# --- Save the output into a file
+if args.output:
+    save_output_file(args.output)
+
+# --- Show the main banner in CLI  
+if args.banner:
+    show_banner()
+
+# --- List the source code URLs found
 if args.list_urls:
-    _, relative_urls = split_path(urls)
+    show_urls_list(urls, args.url)
 
-    for url in relative_urls:
-        full_url = urljoin(args.url + "/", url)
-        print(full_url)
-
+# --- Show the website directory tree
 if args.tree:
-    _, relative_urls = split_path(urls)
-    directory_tree = create_directory_tree(relative_urls)
+    show_tree(urls, args.emojis)
 
-    if args.emojis:
-        show_tree(directory_tree, 1)
-    else:
-        show_tree(directory_tree, 2)
-
+# --- Show a summary of all files found
 if args.files:
-    _, relative_urls = split_path(urls)
-    files_dict = get_file_list(relative_urls)
+    show_file_sumary(urls)
 
-    for main_key, main_value in files_dict.items():
-        print(f"[+] Type: {main_key}")
-        
-        for key, value in main_value.items():
-            if key == "Amount" or key == "Category":
-                print(f"[+] {key}: {value}")
-            else:
-                print(f"[+] {key}:")
-                
-                for i in value:
-                    print(f"  • {i}")
-        print("\n")
-
-
+# --- Clone the website tree locally
 if args.clone_tree:
-    absolute_urls, relative_urls = split_path(urls)
-    directory_tree = create_directory_tree(relative_urls)
-    create_local_clone_tree(absolute_urls, directory_tree, args.clone_tree)
-    
 
+    create_local_clone_tree(urls, args.clone_tree)
+    
+# --- Scan each file of the website
 if args.scan_files:
     absolute_urls, _ = split_path(urls)
     scan_files(absolute_urls)

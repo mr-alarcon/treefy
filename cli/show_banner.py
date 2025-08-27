@@ -1,6 +1,21 @@
-from colorama import Fore, Back, Style
+"""
+Module: show_banner.py
+Author: @mr-alarcon
 
-def create_main_banner():
+Description:
+    Provides a function to display the main banner of the Treefy
+    CLI.
+    
+Functions:
+    show_banner():
+        Prints the colored banner in the CLI.
+"""
+
+# Standard library imports
+from colorama import Fore
+
+# Function to show the banner
+def show_banner():
     
     print(f"""               
                {Fore.GREEN}░░░░░░░░░░░░░░░░░░░░

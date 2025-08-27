@@ -1,35 +1,59 @@
-import time
+"""
+Module: show_tree.py
+Author: @mr-alarcon
+
+Description:
+    Provides a function to create and display a visual directory tree
+    of website URLs in the CLI, with optional emojis and colors.
+    
+Functions:
+    show_tree(url_list, use_emojis=True, level=0, tree_prefix="", initial_call=True):
+        Recursively prints the directory structure of URLs.
+"""
+
+# Standard library imports
 from colorama import Fore as F
 from colorama import init
 
-from core.extensions_files import create_extensions_dict
+# Local modules imports
+from core.extensions_files import all_exts
+from core.path_splitter import split_path
+from core.directory_tree import create_directory_tree
 
 init(autoreset=True)
 
-def show_tree(tree, icon_type=1, level=0, prefix=""):
-    global color, icon
+# Function to create a directory tree and show it
+def show_tree(urls_list, emojis, level=0, tree_prefix="", initial_call=True):
 
-    exts = create_extensions_dict()
+    # Use `initial_call` to run this block only on the first function call
+    if initial_call:
+        _, relative_urls = split_path(urls_list)
+        directory_tree = create_directory_tree(relative_urls)
+    else:
+        directory_tree = urls_list
 
-    keys = list(tree.keys())
+    keys = list(directory_tree.keys())
+    
+    for i, (item_name, item_content) in enumerate(directory_tree.items()):
+        # Identify if is a file
+        file_flag = item_name.split("?")[0].endswith(tuple(f".{ext}" for ext in all_exts))
 
-    for i, (key, value) in enumerate(tree.items()):
-        is_file = key.split("?")[0].endswith(tuple(f".{ext}" for ext in exts))
-        is_last = (i == len(keys) - 1)
+        # Check if this is the last item in the current directory
+        last_item_flag = (i == len(keys) - 1)
+        
+        # Adjust colors, tree connectors, and icons based on file or folder type
+        color = F.RED if file_flag else F.GREEN
+        connector = "└──" if last_item_flag else "├──" 
 
-        color = F.RED if is_file else F.GREEN
-
-        if icon_type == 1:
-            icon = "📄" if is_file else "📁"
+        if emojis:
+            icon = "📄" if file_flag else "📁"
         else:
-            icon = "+" if is_file else "\\"
+            icon = "+" if file_flag else "\\"
 
-        connector = "└──" if is_last else "├──"
+        print(f"{tree_prefix}{F.YELLOW}{connector} {color}{icon} {item_name}")
 
-        time.sleep(0.1)
-        print(f"{prefix}{F.YELLOW}{connector} {color}{icon} {key}")
-
-        if isinstance(value, dict):
-            new_prefix = prefix + ("    " if is_last else f"{F.YELLOW}│   ")
-            show_tree(value, icon_type, level + 1, new_prefix)
+        # If the current item is a directory, execute the function recursively
+        if isinstance(item_content, dict):
+            new_prefix = tree_prefix + ("    " if last_item_flag else f"{F.YELLOW}│   ")
+            show_tree(item_content, emojis, level + 1, new_prefix, initial_call=False)
 

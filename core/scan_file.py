@@ -2,16 +2,7 @@ import requests
 
 from core.get_url_file import get_url_files
 from core.vuln_patterns import create_vulns_patterns_js
-
-binary_requierd_exts = (
-    "jpg", "jpeg", "png", "gif", "svg", "webp", "ico",
-    "woff", "woff2", "ttf", "eot",
-    "mp4", "webm", "ogg", "mp3", "wav", "mov",
-    "zip", "rar",
-    "exe", "bin",
-    "pem", "key", "crt", "p12", "pfx",
-    "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"
-)
+from core.extensions_files import binary_exts
 
 
 def scan_files(absolute_urls):
@@ -23,7 +14,7 @@ def scan_files(absolute_urls):
 
     for key, value in url_files.items():
 
-        if key.split("?")[0].endswith(binary_requierd_exts):
+        if key.split("?")[0].endswith(binary_exts):
             continue
         else:
             response = requests.get(value)

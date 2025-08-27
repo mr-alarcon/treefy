@@ -1,52 +1,72 @@
+"""
+Module: local_clone_tree.py
+Author: @mr-alarcon
+
+Description:
+    Provides a function to create a local clone of a website's directory structure.
+    It recursively traverses the list of URLs or directory tree, creates corresponding
+    folders and files on the local filesystem, and saves file contents in text or
+    binary mode depending on the file extension.
+
+Functions:
+    create_local_clone_tree(urls_list, destination_path, initial_call=True):
+        Recursively builds the local directory structure and downloads files from
+        the provided URLs.
+"""
+
+
+# Standard library imports
 from pathlib import Path
 import requests
 
-from core.extensions_files import create_extensions_dict
+# Local modules imports
+from core.extensions_files import all_exts, binary_exts
 from core.get_url_file import get_url_files
+from core.path_splitter import split_path
+from core.directory_tree import create_directory_tree
 
 
-binary_requierd_exts = (
-    "jpg", "jpeg", "png", "gif", "svg", "webp", "ico",
-    "woff", "woff2", "ttf", "eot",
-    "mp4", "webm", "ogg", "mp3", "wav", "mov",
-    "zip", "rar",
-    "exe", "bin",
-    "pem", "key", "crt", "p12", "pfx",
-    "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"
-)
-
-def create_local_clone_tree(absolute_urls, tree, base_path, get_urls_flag=True):
+# Function to create a local directory tree clone 
+def create_local_clone_tree(urls_list, destination_path, initial_call=True):
     global url_files
-    
-    exts = create_extensions_dict()
 
-    if get_urls_flag:
+    # Use `initial_call` to run this block only on the first function call
+    if initial_call:
+        absolute_urls, relative_urls = split_path(urls_list)
         url_files = get_url_files(absolute_urls)
+        directory_tree = create_directory_tree(relative_urls)
+    else:
+        directory_tree = urls_list
 
-    for key, value in enumerate(tree.items()):
-        is_file = key.split("?")[0].endswith(tuple(f".{ext}" for ext in exts))
+    for item_name, item_content in directory_tree.items():
+        # Identify if is a file
+        file_flag = item_name.split("?")[0].endswith(tuple(f".{ext}" for ext in all_exts))
 
-        current_path = Path(base_path) / key.split("?")[0]
+        # Create the full path where the file or folder will be saved
+        current_path = Path(destination_path) / item_name.split("?")[0]
 
-        if is_file:
+        # If the item is a file create the parents directories
+        if file_flag:
             current_path.parent.mkdir(parents=True, exist_ok=True)
             
-            if key in url_files:
+            if item_name in url_files:
 
-                response = requests.get(url_files[key])
+                response = requests.get(url_files[item_name])
 
-                if key.split("?")[0].endswith(binary_requierd_exts):
+                # Save file in binary mode
+                if item_name.split("?")[0].endswith(binary_exts):
                     with current_path.open("wb") as file:
                         file.write(response.content)
 
+                # Save file in text mode
                 else:            
                     with current_path.open("w", encoding="utf-8") as file:
                         file.write(response.text)
-                        file.close()
-                        del file
 
+        # If the item is a directory, create the folder
         else:
             current_path.mkdir(parents=True, exist_ok=True)
 
-        if isinstance(value, dict):
-            create_local_clone_tree(absolute_urls, value, current_path, print_urls=False)
+        # If the current item is a directory, execute the function recursively
+        if isinstance(item_content, dict):
+            create_local_clone_tree(item_content, current_path, initial_call=False)
