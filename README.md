@@ -66,3 +66,9 @@ These are the features currently available. Although they are not fully tested, 
 - `--output` or `-o`
   Save the CLI output to a file.  
   Example: `python main.py -u https://example.com --tree --output file.txt`
+
+---
+**DISCLAIMER:** Treefy is intended for educational and authorized security research purposes only. 
+It should only be used on systems you own or have explicit permission to test. 
+The author is not responsible for any misuse, damage, or legal consequences arising from its use. 
+Unauthorized use on systems without permission is illegal and may result in criminal and civil penalties.
