@@ -1,3 +1,5 @@
+![README BANNER](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/main/media/readme_banner.gif?token=GHSAT0AAAAAADKBONUTIZSK4V3INMOCN2AG2FVERUA)
+
 ## What is Treefy? (Under Development)
 
 Treefy is a Python project whose main purpose is to **recreate the directory and file structure of a server**, as closely as possible to the original organization.
