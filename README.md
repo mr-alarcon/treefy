@@ -1,4 +1,4 @@
-![README BANNER](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/main/media/readme_banner.gif?token=GHSAT0AAAAAADKBONUTIZSK4V3INMOCN2AG2FVERUA)
+![README BANNER](https://github.com/mr-alarcon/treefy/blob/main/media/readme_banner.gif)
 
 ## What is Treefy? (Under Development)
 
@@ -7,6 +7,8 @@ Treefy is a Python project whose main purpose is to **recreate the directory and
 It also currently includes additional features such as **cloning the structure locally**, **analyzing the source code of each file** to detect potential vulnerabilities, and **categorizing files by extension** into *High/Medium/Low*, depending on how critical files of those types usually are.
 
 To learn more about the current features and those under development, please refer to the **Features** section.
+
+![SCREENSHOT 1](https://github.com/mr-alarcon/treefy/blob/main/media/1.png)
 
 ---
 ## How to work Treefy?
@@ -30,6 +32,8 @@ To scan files, Treefy first collects all URLs embedded in the website's source c
 
 
 ---
+![SCREENSHOT 2](https://github.com/mr-alarcon/treefy/blob/main/media/2.png)
+
 ## Features
 
 These are the features currently available. Although they are not fully tested, they should work without major issues. Features marked with `*` are still under development.
