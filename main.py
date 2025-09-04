@@ -2,7 +2,6 @@
 import argparse
 
 # Local modules imports
-from cli.show_banner import show_banner
 from cli.show_tree import show_tree
 from cli.show_urls_list import show_urls_list
 from cli.show_file_sumary import show_file_sumary
@@ -24,7 +23,6 @@ config_group.add_argument("-u", "--url", metavar="URL", required=True, help="Tar
 config_group.add_argument("-v", "--verify-cert", action="store_true", help="Verify SSL certificate")
 
 output_group = parser.add_argument_group("Outputs")
-output_group.add_argument("-b", "--banner", action="store_true", help="Show main banner")
 output_group.add_argument("-e", "--emojis", action="store_true", help="Show emojis in the directory tree")
 output_group.add_argument("-l", "--list-urls", action="store_true", help="List URLs found in the HTML source")
 output_group.add_argument("-t", "--tree", action="store_true", help="Show directory tree")
@@ -36,6 +34,7 @@ output_group.add_argument("-o", "--output", metavar="FILE", type=str, help="Save
 args = parser.parse_args()
 
 
+print(f"[+] URL target> {args.url}")
 # ---> Execute the corresponding functions based on the parsed CLI arguments
 
 # --- Verify SSL certified (True, False)
@@ -47,10 +46,6 @@ else:
 # --- Save the output into a file
 if args.output:
     save_output_file(args.output)
-
-# --- Show the main banner in CLI  
-if args.banner:
-    show_banner()
 
 # --- List the source code URLs found
 if args.list_urls:
