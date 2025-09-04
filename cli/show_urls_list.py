@@ -14,6 +14,7 @@ Functions:
 
 # Standard library imports
 from urllib.parse import urljoin
+from colorama import Fore as F
 
 # Local modules imports
 from core.path_splitter import split_path
@@ -24,6 +25,6 @@ def show_urls_list(urls, base_url):
     _, relative_urls = split_path(urls)
 
     # Prepend the base URL to each relative URL to get the full link
-    for url in relative_urls:
+    for url in list(set(relative_urls)):
         full_url = urljoin(base_url + "/", url)
-        print(full_url)
+        print(f"{F.GREEN}[+] {F.WHITE}{full_url}{F.RESET}")

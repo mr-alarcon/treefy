@@ -60,4 +60,4 @@ def get_url_list(url, ssl_certified=False):
     else:
         return
 
-    return list(set(urls_found))
+    return urls_found

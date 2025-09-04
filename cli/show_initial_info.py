@@ -8,3 +8,5 @@ def show_initial_info(target, verify_cert):
         print(f"{F.YELLOW}[!] {F.WHITE}Verify SSL certified to the target")
     else:
         pass
+
+    print("")
