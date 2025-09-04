@@ -5,6 +5,7 @@ import argparse
 from cli.show_tree import show_tree
 from cli.show_urls_list import show_urls_list
 from cli.show_file_sumary import show_file_sumary
+from cli.show_initial_info import show_initial_info
 
 from core.get_url_list import get_url_list
 from core.get_file_list import get_file_list
@@ -33,8 +34,9 @@ output_group.add_argument("-o", "--output", metavar="FILE", type=str, help="Save
 
 args = parser.parse_args()
 
+show_initial_info(args.url, args.verify_cert)
 
-print(f"[+] URL target> {args.url}")
+
 # ---> Execute the corresponding functions based on the parsed CLI arguments
 
 # --- Verify SSL certified (True, False)
