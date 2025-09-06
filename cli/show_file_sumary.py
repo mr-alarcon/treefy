@@ -12,6 +12,9 @@ Functions:
         Prints a structured summary of all files retrieved from the given URLs.
 """
 
+# Standard library imports
+from colorama import Fore as F
+
 # Local modules imports
 from core.path_splitter import split_path
 from core.get_file_list import get_file_list
@@ -26,15 +29,15 @@ def show_file_sumary(urls):
 
     # Iterates over each file type and its associated information
     for file_type, info_file in files_dict.items():
-        print(f"[+] Type: {file_type}")
+        print(f"{F.GREEN}[+] {F.WHITE}Type: {F.GREEN}{file_type}{F.RESET}")
 
         for title_info, info in info_file.items():
             if title_info == "Amount" or title_info == "Category":
-                print(f"[+] {title_info}: {info}")
+                print(f"{F.GREEN}[+] {F.WHITE}{title_info}: {F.GREEN}{info}{F.RESET}")
             else:
-                print(f"[+] {title_info}:")
+                print(f"{F.GREEN}[+] {F.WHITE}{title_info}:{F.RESET}")
 
                 for i in info:
-                    print(f"  • {i}")
+                    print(f"{F.GREEN}  • {F.WHITE}{i}{F.RESET}")
 
-        print("\n")
+        
