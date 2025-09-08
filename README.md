@@ -47,9 +47,6 @@ These are the features currently available. Although they are not fully tested, 
 - `--verify-cert` or `-v`
   Enable SSL certificate verification for HTTPS sites.
 
-- `--banner` or `-b`
-  Show the script banner.
-
 - `--emojis` or `-e`
   Display emojis when using the `--tree` option to show the directory structure.
 
@@ -62,11 +59,11 @@ These are the features currently available. Although they are not fully tested, 
 - `--files` or `-f`
   Show a summary of the found files, including: file name, file extension counts, and extension category (High, Medium, Low).
 
-- `--clone-tree` or `-c`
+- * `--clone-tree` or `-c`
   Clone the directory structure locally.  
   Example: `python main.py -u https://example.com --clone-tree path/to/clone`
 
-- `--scan-files` or `-s`
+- * `--scan-files` or `-s`
   Scan each code file to detect possible vulnerabilities.
 
 - `--output` or `-o`
