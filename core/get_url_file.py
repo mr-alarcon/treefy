@@ -23,11 +23,11 @@ from urllib.parse import urlparse
 # Local modules imports
 from core.extensions_files import all_exts
 
-def get_url_files(absolute_urls):
+def get_url_files(urls):
     url_files = {}
 
     # Iterate through all provided URLs
-    for url in absolute_urls:
+    for url in urls:
         if url.lower().split("?")[0].endswith(tuple(f".{ext}" for ext in all_exts)):
             path = urlparse(url).path
             file_name = os.path.basename(path)

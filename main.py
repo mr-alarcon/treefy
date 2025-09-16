@@ -63,8 +63,7 @@ if args.files:
 
 # --- Clone the website tree locally
 if args.clone_tree:
-
-    create_local_clone_tree(urls, args.clone_tree)
+    create_local_clone_tree(urls, args.clone_tree, True, args.url)
     
 # --- Scan each file of the website
 if args.scan_files:

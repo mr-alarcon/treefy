@@ -27,13 +27,14 @@ from core.directory_tree import create_directory_tree
 
 
 # Function to create a local directory tree clone 
-def create_local_clone_tree(urls_list, destination_path, initial_call=True):
-    global url_files
+def create_local_clone_tree(urls_list, destination_path, initial_call=True, url_base=None):
+    global base, url_files
 
     # Use `initial_call` to run this block only on the first function call
     if initial_call:
         absolute_urls, relative_urls = split_path(urls_list)
-        url_files = get_url_files(absolute_urls)
+        url_files = get_url_files(relative_urls)
+        base = url_base
         directory_tree = create_directory_tree(relative_urls)
     else:
         directory_tree = urls_list
@@ -51,7 +52,7 @@ def create_local_clone_tree(urls_list, destination_path, initial_call=True):
             
             if item_name in url_files:
 
-                response = requests.get(url_files[item_name])
+                response = requests.get(base, url_files[item_name])
 
                 # Save file in binary mode
                 if item_name.split("?")[0].endswith(binary_exts):
