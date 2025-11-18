@@ -1,6 +1,7 @@
 # Standard library imports
 import argparse
-
+import sys
+from colorama import Fore as F
 # Local modules imports
 from cli.show_tree import show_tree
 from cli.show_urls_list import show_urls_list
@@ -34,8 +35,14 @@ output_group.add_argument("-o", "--output", metavar="FILE", type=str, help="Save
 
 args = parser.parse_args()
 
-show_initial_info(args.url, args.verify_cert)
 
+# --- If the user provides no reconnaissance parameters, show this message and exit.
+if not any([args.list_urls, args.tree, args.files, args.clone_tree, args.scan_files]):
+    print(f"{F.YELLOW}[!] {F.RED}No action was specified for the target. Please specify at least one reconnaissance option.{F.RESET}")
+    sys.exit()
+
+# Show initial input information
+show_initial_info(args.url, args.verify_cert)
 
 # ---> Execute the corresponding functions based on the parsed CLI arguments
 
