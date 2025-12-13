@@ -1,6 +1,6 @@
 import argparse
 
-from core.target_status import check_status_code
+from core.engine import run
 
 def build_parser():        
     parser = argparse.ArgumentParser(description="Treefy by @mr-alarcon")
@@ -20,10 +20,7 @@ def main():
     url = arguments.url
     tree = arguments.tree
 
-    print(check_status_code(url))
-    
-
-    
+    run(url, tree)
 
 
 
