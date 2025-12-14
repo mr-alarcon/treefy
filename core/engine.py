@@ -3,7 +3,7 @@ This module coordinates the main execution flow of the application
 """
 
 from core.target_status import check_status_code
-from discovery.urls import extract_urls, filter_urls
+from discovery.urls import extract_urls, filter_urls, normalize_urls
 
 def run(url, tree):
     status, code = check_status_code(url)
@@ -15,10 +15,12 @@ def run(url, tree):
         return 
     
     urls_found = extract_urls(url)
-    print(len(urls_found))
+    urls_filtered = filter_urls(urls_found)
+    urls_normalized = normalize_urls(url, urls_filtered)
 
-    urls_found = filter_urls(urls_found)
-    print(len(urls_found))
+    for i in urls_normalized:
+        print(i)
+
 
 
     
