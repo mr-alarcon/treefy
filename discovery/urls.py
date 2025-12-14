@@ -27,3 +27,18 @@ def extract_urls(url_target):
         urls_found.append(clean_url)
 
     return urls_found
+
+
+def filter_urls(urls_found):
+    urls_filtered = []
+
+    for url in urls_found:
+        if url.startswith(("#", "tel:", "mailto:", "javascript:")):
+            continue
+        else:
+            urls_filtered.append(url)
+
+    urls_filtered = list(set(urls_filtered))
+
+    return urls_filtered
+
