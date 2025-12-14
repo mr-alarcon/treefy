@@ -8,6 +8,9 @@ from bs4 import BeautifulSoup
 from urllib.parse import unquote, urljoin
 
 def extract_urls(url_target):
+    """
+    Retrieve the target page and extract raw URLs from common HTML elements.
+    """
     urls_found = []
 
     response = requests.get(url_target)
@@ -31,6 +34,9 @@ def extract_urls(url_target):
 
 
 def filter_urls(urls_found):
+    """
+    Remove non navigable URLs such as anchors and unsupported schemes.
+    """
     urls_filtered = []
 
     for url in urls_found:
@@ -39,13 +45,15 @@ def filter_urls(urls_found):
         else:
             urls_filtered.append(url)
 
-    urls_filtered = list(set(urls_filtered))
-
     return urls_filtered
 
 
 
 def normalize_urls(url_target, urls_filtered):
+    """
+    Normalize URLs by resolving relative and protocol relative paths
+    using the target URL as base.
+    """
     urls_normalized = []
 
     for url in urls_filtered:
@@ -53,3 +61,19 @@ def normalize_urls(url_target, urls_filtered):
         urls_normalized.append(url)
 
     return urls_normalized
+
+
+
+def deduplicate_urls(urls_normalized):
+    """
+    Remove duplicate URLs while preserving their original order.
+    """
+    urls_deduplicated = []
+    seen = set()
+    
+    for url in urls_normalized:
+        if url not in seen:
+            seen.add(url)
+            urls_deduplicated.append(url)
+
+    return urls_deduplicated
