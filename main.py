@@ -1,3 +1,7 @@
+"""
+Entry point
+"""
+
 import argparse
 
 from core.engine import run
