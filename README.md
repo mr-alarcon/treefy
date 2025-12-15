@@ -1,3 +1,10 @@
+> ⚠️ **Warning**
+>
+> This branch is **legacy** and contains partially implemented and outdated and empty functionality.
+>
+> For the stable version of the project, visit the [main branch](https://github.com/mr-alarcon/treefy/tree/main).
+
+
 ![README BANNER](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/readme_banner.gif)
 
 ## What is Treefy? (Under Development)
