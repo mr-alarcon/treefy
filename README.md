@@ -8,7 +8,7 @@ It also currently includes additional features such as **cloning the structure l
 
 To learn more about the current features and those under development, please refer to the **Features** section.
 
-![SCREENSHOT 1](https://github.com/mr-alarcon/treefy/blob/main/media/1.png)
+![SCREENSHOT 1](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/1.png)
 
 ---
 ## How to work Treefy?
@@ -32,7 +32,7 @@ To scan files, Treefy first collects all URLs embedded in the website's source c
 
 
 ---
-![SCREENSHOT 2](https://github.com/mr-alarcon/treefy/blob/main/media/2.png)
+![SCREENSHOT 2](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/2.png)
 
 ## Features
 
