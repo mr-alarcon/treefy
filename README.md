@@ -12,6 +12,8 @@ Treefy sends a GET request to the target URL provided as a parameter and analyze
 
 Each URL is then split into segments corresponding to each part of its path; for example, `location/current/test.txt` becomes `'location'`, `'current'`, and `'test.txt'`. Each segment is converted into a dictionary key, whose value is another dictionary representing child directories or files. This process is performed recursively, generating a complete tree of the site’s directory structure.
 
+At the end of the analysis, TreeFy provides a summary report including the total number of files, directories, discovered subdomains, and external domains found during the crawl.
+
 ![SCREENSHOT 1](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/treefy_cap3.png)
 
 ---
