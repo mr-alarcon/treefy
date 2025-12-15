@@ -1,4 +1,4 @@
-![README BANNER](https://github.com/mr-alarcon/treefy/blob/main/media/readme_banner.gif)
+![README BANNER](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/readme_banner.gif)
 
 ## What is Treefy? (Under Development)
 
