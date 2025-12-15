@@ -1,6 +1,6 @@
 > ⚠️ **Warning**
 >
-> This branch is **legacy** and contains partially implemented and outdated and empty functionality.
+> This branch is **legacy** and contains partially implemented and outdated/empty functionality.
 >
 > For the stable version of the project, visit the [main branch](https://github.com/mr-alarcon/treefy/tree/main).
 
