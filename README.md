@@ -3,7 +3,7 @@
 
 Treefy is a Python project whose main purpose is to **recreate the directory and file structure of a server**, as closely as possible to the original organization.
 
-![gif](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/using_treefy.gif)
+![gif](https://github.com/mr-alarcon/treefy/blob/legacy/media/last_gif.gif)
 
 ## How to work Treefy?
 
@@ -14,10 +14,27 @@ Each URL is then split into segments corresponding to each part of its path; for
 
 At the end of the analysis, TreeFy provides a summary report including the total number of files, directories, discovered subdomains, and external domains found during the crawl.
 
-![SCREENSHOT 1](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/treefy_cap3.png)
+![SCREENSHOT 1](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/last.png)
+
+
+## Available Options
+
+<table>
+  <tr>
+    <th>Argument</th>
+    <th>Function</th>
+  </tr>
+  <tr>
+    <td><code>-t</code>, <code>--tree</code></td>
+    <td>
+      Build the directory tree of the target website and show a summary
+      of files, directories, subdomains, and external domains.
+    </td>
+  </tr>
+</table>
+
 
 ---
-
 
 **DISCLAIMER:** Treefy is intended for educational and authorized security research purposes only. 
 It should only be used on systems you own or have explicit permission to test. 
