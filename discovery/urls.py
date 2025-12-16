@@ -5,7 +5,8 @@ extracting all URLs found in common HTML elements
 
 import requests 
 from bs4 import BeautifulSoup
-from urllib.parse import unquote, urljoin
+from urllib.parse import unquote, urljoin, urlparse, urlunparse
+
 
 def extract_urls(url_target):
     """
@@ -57,8 +58,12 @@ def normalize_urls(url_target, urls_filtered):
     urls_normalized = []
 
     for url in urls_filtered:
-        url = urljoin(url_target, url)
-        urls_normalized.append(url)
+        url_absolute = urljoin(url_target, url)
+        
+        url_parsed = urlparse(url_absolute)
+        url_normalized = urlunparse(url_parsed._replace(query="", fragment=""))
+
+        urls_normalized.append(url_normalized)
 
     return urls_normalized
 

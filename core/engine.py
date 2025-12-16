@@ -26,6 +26,9 @@ def run(url, tree):
 
         files_urls, directory_urls, subdomains_urls, external_domains_urls = classifier_urls(url, urls_deduplicated)
 
+        for i in urls_deduplicated:
+            print(i)
+
         files_count = len(files_urls)
         directory_count = len(directory_urls)
         subdomains_count = len(subdomains_urls)
