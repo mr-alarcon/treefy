@@ -6,6 +6,7 @@ from core.target_status import check_status_code
 from discovery.urls import extract_urls, filter_urls, normalize_urls, deduplicate_urls
 from analysis.classifier import classifier_urls
 from features.tree_builder import tree_builder, add_files_to_tree
+from features.tree_cloner import tree_cloner
 
 from output.tree_printer import print_tree
 
@@ -36,9 +37,8 @@ def run(url, tree, clone_tree):
         print(f"\n{directory_count} directories, {files_count} files, {subdomains_count} subdomains, {external_domains_count} external domains")
 
     if clone_tree:
-        pass
-
-
+        print(tree_structure)
+        tree_cloner(tree_structure, url)
         
 
 
