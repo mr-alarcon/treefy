@@ -12,6 +12,7 @@ def build_parser():
     parser_arguments = parser.add_argument_group("Flags")
     parser_arguments.add_argument("-u", "--url", metavar="URL", required=True, help="Target URL")
     parser_arguments.add_argument("-t", "--tree", action="store_true", help="Show directory tree")
+    parser_arguments.add_argument("-c", "--clone-tree", action="store_true", help="Clone directory tree")
 
     arguments = parser.parse_args()
 
@@ -23,8 +24,9 @@ def main():
     
     url = arguments.url
     tree = arguments.tree
+    clone_tree = arguments.clone_tree
 
-    run(url, tree)
+    run(url, tree, clone_tree)
 
 
 if __name__ == "__main__":

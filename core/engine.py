@@ -9,7 +9,7 @@ from features.tree_builder import tree_builder, add_files_to_tree
 
 from output.tree_printer import print_tree
 
-def run(url, tree):
+def run(url, tree, clone_tree):
     status, code = check_status_code(url)
 
     if status:
@@ -35,8 +35,8 @@ def run(url, tree):
         print_tree(tree_structure)
         print(f"\n{directory_count} directories, {files_count} files, {subdomains_count} subdomains, {external_domains_count} external domains")
 
-
-
+    if clone_tree:
+        pass
 
 
         
