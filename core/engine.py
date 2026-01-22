@@ -13,12 +13,6 @@ def run(url, tree):
     status, code = check_status_code(url)
 
     if status:
-        pass
-    else:
-        print(f"[!] Target not accessible ({code})")
-        return 
-    
-    if tree:
         urls_found = extract_urls(url)
         urls_filtered = filter_urls(urls_found)
         urls_normalized = normalize_urls(url, urls_filtered)
@@ -33,9 +27,12 @@ def run(url, tree):
 
         directory_structure = tree_builder(directory_urls)
         tree_structure = add_files_to_tree(directory_structure, files_urls)
-
+    else:
+        print(f"[!] Target not accessible ({code})")
+        return 
+    
+    if tree:
         print_tree(tree_structure)
-
         print(f"\n{directory_count} directories, {files_count} files, {subdomains_count} subdomains, {external_domains_count} external domains")
 
 
