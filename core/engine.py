@@ -6,7 +6,7 @@ from core.target_status import check_status_code
 from discovery.urls import extract_urls, filter_urls, normalize_urls, deduplicate_urls
 from analysis.classifier import classifier_urls
 from features.tree_builder import tree_builder, add_files_to_tree
-from features.tree_cloner import tree_cloner
+from features.tree_cloner import create_base_path, tree_cloner
 
 from output.tree_printer import print_tree
 
@@ -38,7 +38,8 @@ def run(url, tree, clone_tree):
 
     if clone_tree:
         print(tree_structure)
-        tree_cloner(tree_structure, url)
+        base_path = create_base_path(url)
+        tree_cloner(tree_structure, base_path)
         
 
 

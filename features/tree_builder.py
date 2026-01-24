@@ -47,6 +47,6 @@ def add_files_to_tree(tree, files_urls):
             current = current.setdefault(segment, {})
 
         if filename not in current:
-            current[filename] = None
+            current[filename] = file_url
 
     return tree
