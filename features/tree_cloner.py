@@ -2,11 +2,16 @@ from pathlib import Path
 from urllib.parse import urlparse
 import requests
 
-def create_base_path(url):
+def create_base_path(url, root_path):
     parsed_url = urlparse(url).netloc
     parsed_url = parsed_url.replace(":", "_")
 
-    base_path = Path(f"./clones/{parsed_url}")
+    if root_path.endswith("/"):
+        pass
+    else:
+        root_path = root_path + "/"
+        
+    base_path = Path(f"{root_path}{parsed_url}")
     base_path.mkdir(parents=True, exist_ok=True)
 
     return base_path
