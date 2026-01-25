@@ -37,7 +37,6 @@ def run(url, tree, clone_tree):
         print(f"\n{directory_count} directories, {files_count} files, {subdomains_count} subdomains, {external_domains_count} external domains")
 
     if clone_tree:
-        print(tree_structure)
         base_path = create_base_path(url)
         tree_cloner(tree_structure, base_path)
         
