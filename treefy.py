@@ -13,6 +13,7 @@ def build_parser():
     parser_arguments.add_argument("-u", "--url", metavar="URL", required=True, help="Target URL")
     parser_arguments.add_argument("-t", "--tree", action="store_true", help="Show directory tree")
     parser_arguments.add_argument("-c", "--clone-tree", nargs="?", const="./clones/", metavar="PATH", help="Clone directory tree")
+    parser_arguments.add_argument("-o", "--output-file", nargs="?", metavar="PATH", help="Save output to file")
 
     arguments = parser.parse_args()
 
@@ -25,8 +26,13 @@ def main():
     url = arguments.url
     tree = arguments.tree
     clone_tree = arguments.clone_tree
+    output_file = arguments.output_file
 
-    run(url, tree, clone_tree)
+    run(url, 
+        tree, 
+        clone_tree, 
+        output_file,
+        )
 
 
 if __name__ == "__main__":

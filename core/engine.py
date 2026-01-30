@@ -2,15 +2,19 @@
 This module coordinates the main execution flow of the application
 """
 
+import sys
+
 from core.target_status import check_status_code
 from discovery.urls import extract_urls, filter_urls, normalize_urls, deduplicate_urls
 from analysis.classifier import classifier_urls
+
 from features.tree_builder import tree_builder, add_files_to_tree
 from features.tree_cloner import create_base_path, tree_cloner
+from features.output_file import save_output_file
 
 from output.tree_printer import print_tree
 
-def run(url, tree, clone_tree):
+def run(url, tree, clone_tree, output_file):
     status, code = check_status_code(url)
 
     if status:
@@ -32,16 +36,17 @@ def run(url, tree, clone_tree):
         print(f"[!] Target not accessible ({code})")
         return 
     
+    if output_file:
+        save_output_file(output_file)
+    
     if tree:
         print_tree(tree_structure)
         print(f"\n{directory_count} directories, {files_count} files, {subdomains_count} subdomains, {external_domains_count} external domains")
 
     if clone_tree:
-        print("\nCloning files from remote source…")
         base_path = create_base_path(url, clone_tree)
         tree_cloner(tree_structure, base_path)
-        
-
-
+    
+    sys.stdout.close()
 
   
