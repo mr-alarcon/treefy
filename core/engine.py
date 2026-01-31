@@ -14,6 +14,7 @@ from features.output_file import save_output_file
 from features.file_details import file_details
 
 from output.tree_printer import print_tree
+from output.files_details_printer import print_file_details
 
 def run(url, tree, clone_tree, output_file, details):
     status, code = check_status_code(url)
@@ -50,8 +51,7 @@ def run(url, tree, clone_tree, output_file, details):
 
     if details:
         files_details = file_details(files_urls)
-        for i in files_details:
-            print(i)
+        print_file_details(files_details)
         
     sys.stdout.close()
 
