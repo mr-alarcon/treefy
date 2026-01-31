@@ -1,6 +1,5 @@
 import sys
 import re
-from pathlib import Path
 from types import SimpleNamespace
 
 ANSI_ESCAPE = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')

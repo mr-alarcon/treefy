@@ -11,10 +11,11 @@ from analysis.classifier import classifier_urls
 from features.tree_builder import tree_builder, add_files_to_tree
 from features.tree_cloner import create_base_path, tree_cloner
 from features.output_file import save_output_file
+from features.file_details import file_details
 
 from output.tree_printer import print_tree
 
-def run(url, tree, clone_tree, output_file):
+def run(url, tree, clone_tree, output_file, details):
     status, code = check_status_code(url)
 
     if status:
@@ -46,7 +47,12 @@ def run(url, tree, clone_tree, output_file):
     if clone_tree:
         base_path = create_base_path(url, clone_tree)
         tree_cloner(tree_structure, base_path)
-    
+
+    if details:
+        files_details = file_details(files_urls)
+        for i in files_details:
+            print(i)
+        
     sys.stdout.close()
 
   
