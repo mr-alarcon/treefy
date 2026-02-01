@@ -17,10 +17,17 @@ def build_parser():
     parser_arguments.add_argument("-u", "--url", metavar="URL", required=True, help="Target URL")
     parser_arguments.add_argument("-t", "--tree", action="store_true", help="Show directory tree")
     parser_arguments.add_argument("-d", "--details", action="store_true", help="Show details for discovered files")
+    parser_arguments.add_argument("--details-name", nargs="?", metavar="NAME", help="Filter detailed output by file name")
+    parser_arguments.add_argument("--details-ext", nargs="?", metavar="EXT", help="Filter detailed output by file extension")
+    parser_arguments.add_argument("--details-risk", nargs="?", metavar="LEVEL", help="Filter detailed output by extension risk level")
     parser_arguments.add_argument("-c", "--clone-tree", nargs="?", const="./clones/", metavar="PATH", help="Clone directory tree")
     parser_arguments.add_argument("-o", "--output-file", nargs="?", metavar="PATH", help="Save output to file")
 
     arguments = parser.parse_args()
+
+    if (arguments.details_name or arguments.details_ext or arguments.details_risk) and not arguments.details:
+        parser.error("--details is required when using detail filters")
+
 
     return arguments
 
@@ -31,15 +38,20 @@ def main():
     url = arguments.url
     tree = arguments.tree
     details = arguments.details
+    details_name = arguments.details_name
+    details_ext = arguments.details_ext
+    details_risk = arguments.details_risk
     clone_tree = arguments.clone_tree
     output_file = arguments.output_file
-    
 
     run(url, 
         tree, 
         clone_tree, 
         output_file,
         details,
+        details_name,
+        details_ext,
+        details_risk,
         )
 
 

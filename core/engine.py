@@ -7,6 +7,7 @@ import sys
 from core.target_status import check_status_code
 from discovery.urls import extract_urls, filter_urls, normalize_urls, deduplicate_urls
 from analysis.classifier import classifier_urls
+from utils.filters import matches_details_filters
 
 from features.tree_builder import tree_builder, add_files_to_tree
 from features.tree_cloner import create_base_path, tree_cloner
@@ -16,7 +17,7 @@ from features.file_details import file_details
 from output.tree_printer import print_tree
 from output.files_details_printer import print_file_details
 
-def run(url, tree, clone_tree, output_file, details):
+def run(url, tree, clone_tree, output_file, details, details_name, details_ext, details_risk):
     status, code = check_status_code(url)
 
     if status:
@@ -51,8 +52,17 @@ def run(url, tree, clone_tree, output_file, details):
 
     if details:
         files_details = file_details(files_urls)
-        print_file_details(files_details)
-        
+        for file_info in files_details:
+            if not matches_details_filters(
+                file_info,
+                details_name,
+                details_ext,
+                details_risk
+            ):
+                continue
+
+            print_file_details(file_info)
+
     sys.stdout.close()
 
   
