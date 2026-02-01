@@ -7,7 +7,7 @@ It also currently includes additional features such as **cloning the structure l
 
 To learn more about the current features and those under development, please refer to the **Features** section.
 
-![gif](https://github.com/mr-alarcon/treefy/blob/legacy/media/last_gif.gif)
+![Photo 1](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/main/assets/images/treefy_photo1.png)
 
 ## How to work Treefy?
 
@@ -24,7 +24,9 @@ The option to display details of discovered files in Treefy allows users to view
 #### Clone Directory Structure
 The local cloning of the directory structure follows the same process used to generate the tree with the `--tree` parameter. Treefy creates directories and files following the hierarchy of the generated tree. To determine if a path segment is a file or a directory, Treefy checks for the presence of a file extension. If it is a directory, a folder is created locally. If it is a file, a local file is created with the corresponding extension, and a request is made to the file's URL to copy its source code into the created file. For multimedia files, the same process is applied, but the source code is written in **binary mode** to preserve the file contents.
 
-![SCREENSHOT 1](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/legacy/media/last.png)
+![Photo 2](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/main/assets/images/treefy_photo2.png)
+
+![Photo 3](https://raw.githubusercontent.com/mr-alarcon/treefy/refs/heads/main/assets/images/treefy_photo3.png)
 
 
 ## Features
