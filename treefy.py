@@ -9,6 +9,7 @@ from core.engine import run
 def build_parser():        
     parser = argparse.ArgumentParser(description="Treefy by @mr-alarcon",
                                      add_help=False,
+                                     usage="treefy.py [-h] [-u TARGET] [-d] [--details-name NAME] [--details-ext EXT] [--details-risk LVL] [-c PATH] [-o FILE] [-e]",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, max_help_position=40, width=100)
                                      )
 
@@ -21,7 +22,7 @@ def build_parser():
     parser_arguments.add_argument("--details-ext", nargs="?", metavar="EXT", help="Filter detailed output by file extension")
     parser_arguments.add_argument("--details-risk", nargs="?", metavar="LEVEL", help="Filter detailed output by extension risk level")
     parser_arguments.add_argument("-c", "--clone-tree", nargs="?", const="./clones/", metavar="PATH", help="Clone directory tree")
-    parser_arguments.add_argument("-o", "--output-file", nargs="?", metavar="PATH", help="Save output to file")
+    parser_arguments.add_argument("-o", "--output-file", nargs="?", metavar="FILE", help="Save output to file")
     parser_arguments.add_argument("-e", "--emojis", action="store_true", help="Show emojis in the directory tree")
     arguments = parser.parse_args()
 
