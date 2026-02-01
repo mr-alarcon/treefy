@@ -44,16 +44,60 @@ The local cloning of the directory structure follows the same process used to ge
   <tr>
     <td><code>-d</code>, <code>--details</code></td>
      <td>
-      The option to display discovered file details in Treefy provides additional information such as the file name, extension, URL, size and last modification time
+      Display discovered file details in Treefy provides additional information such as the file name, extension, URL, size and last modification time.
     </td>
   </tr>
+
+  <tr>
+    <td><code>--details-name</code></td>
+     <td>
+      Filter used together with the -d flag to display only files whose names match specific criteria during the detailed analysis.
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>--details-ext</code></td>
+     <td>
+      Filter used together with the -d flag to display only files whose extensions match specific criteria during the detailed analysis.
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>--details-risk</code></td>
+     <td>
+      Filter used together with the -d flag to display only files whose extension risk category match specific criteria during the detailed analysis.
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>-c</code> <code>--clone-tree</code></td>
+     <td>
+      Allows replicate the discovered directory structure locally, creating folders and files based on the analyzed tree.
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>-o</code> <code>--output-file</code></td>
+     <td>
+      Allows saving the generated output to a specified file rather than displaying it only in the terminal.
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>-e</code> <code>--emojis</code></td>
+     <td>
+      Enables the use of emojis when displaying the directory tree output.
+    </td>
+  </tr>
+
 </table>
 
 
 ---
 
-**DISCLAIMER:** Treefy is intended for educational and authorized security research purposes only. 
-It should only be used on systems you own or have explicit permission to test. 
-The author is not responsible for any misuse, damage, or legal consequences arising from its use. 
-Unauthorized use on systems without permission is illegal and may result in criminal and civil penalties.
+> **DISCLAIMER:** 
+> Treefy is intended for educational and authorized security research purposes only. 
+> It should only be used on systems you own or have explicit permission to test. 
+> The author is not responsible for any misuse, damage, or legal consequences arising from its use. 
+> Unauthorized use on systems without permission is illegal and may result in criminal and civil penalties.
 
