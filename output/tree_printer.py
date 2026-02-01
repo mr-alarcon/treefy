@@ -1,21 +1,28 @@
-def print_tree(tree, prefix=""):
+def print_tree(tree, emojis, prefix=""):
     """
     Utilities for printing a directory tree to the terminal
     """
     if not isinstance(tree, dict):
-        return
-
+        return  
+    
     items = list(tree.items())
     total = len(items)
 
+    if emojis:
+        file_icon = "📄"
+        dir_icon = "📁"
+    else:
+        file_icon = ""
+        dir_icon = ""
+
     for index, (name, node) in enumerate(items):
         is_last = index == total - 1
-        connector = "└── " if is_last else "├── "
+        connector = f"└── " if is_last else f"├── "
 
         if isinstance(node, str):
-            print(prefix + connector + name)
+            print(prefix + connector + file_icon + name)
 
         elif isinstance(node, dict):
-            print(prefix + connector + name + "/")
+            print(prefix + connector + dir_icon + name + "/")
             extension = "    " if is_last else "│   "
-            print_tree(node, prefix + extension)
+            print_tree(node, emojis, prefix + extension)

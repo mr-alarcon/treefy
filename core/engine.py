@@ -17,7 +17,7 @@ from features.file_details import file_details
 from output.tree_printer import print_tree
 from output.files_details_printer import print_file_details
 
-def run(url, tree, clone_tree, output_file, details, details_name, details_ext, details_risk):
+def run(url, tree, clone_tree, output_file, details, details_name, details_ext, details_risk, emojis):
     status, code = check_status_code(url)
 
     if status:
@@ -43,7 +43,7 @@ def run(url, tree, clone_tree, output_file, details, details_name, details_ext, 
         save_output_file(output_file)
     
     if tree:
-        print_tree(tree_structure)
+        print_tree(tree_structure, emojis, "")
         print(f"\n{directory_count} directories, {files_count} files, {subdomains_count} subdomains, {external_domains_count} external domains")
 
     if clone_tree:

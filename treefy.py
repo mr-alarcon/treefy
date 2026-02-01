@@ -22,11 +22,14 @@ def build_parser():
     parser_arguments.add_argument("--details-risk", nargs="?", metavar="LEVEL", help="Filter detailed output by extension risk level")
     parser_arguments.add_argument("-c", "--clone-tree", nargs="?", const="./clones/", metavar="PATH", help="Clone directory tree")
     parser_arguments.add_argument("-o", "--output-file", nargs="?", metavar="PATH", help="Save output to file")
-
+    parser_arguments.add_argument("-e", "--emojis", action="store_true", help="Show emojis in the directory tree")
     arguments = parser.parse_args()
 
     if (arguments.details_name or arguments.details_ext or arguments.details_risk) and not arguments.details:
         parser.error("--details is required when using detail filters")
+
+    if arguments.emojis and not arguments.tree:
+        parser.error("--tree is required when using emojis option")
 
 
     return arguments
@@ -43,6 +46,7 @@ def main():
     details_risk = arguments.details_risk
     clone_tree = arguments.clone_tree
     output_file = arguments.output_file
+    emojis = arguments.emojis
 
     run(url, 
         tree, 
@@ -52,6 +56,7 @@ def main():
         details_name,
         details_ext,
         details_risk,
+        emojis,
         )
 
 
