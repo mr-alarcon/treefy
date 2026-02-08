@@ -8,13 +8,13 @@ from bs4 import BeautifulSoup
 from urllib.parse import unquote, urljoin, urlparse, urlunparse
 
 
-def extract_urls(url_target):
+def extract_urls(url_target, allow_redirect):
     """
     Retrieve the target page and extract raw URLs from common HTML elements.
     """
     urls_found = []
 
-    response = requests.get(url_target)
+    response = requests.get(url_target, allow_redirects=allow_redirect)
     source_code = BeautifulSoup(response.text, "html.parser")
 
     href_tags = source_code.find_all(["a", "img", "script", "link"], href=True)

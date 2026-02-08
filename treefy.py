@@ -24,6 +24,7 @@ def build_parser():
     parser_arguments.add_argument("-c", "--clone-tree", nargs="?", const="./clones/", metavar="PATH", help="Clone directory tree")
     parser_arguments.add_argument("-o", "--output-file", nargs="?", metavar="FILE", help="Save output to file")
     parser_arguments.add_argument("-e", "--emojis", action="store_true", help="Show emojis in the directory tree")
+    parser_arguments.add_argument("--allow-redirect", action="store_true", help="Follow redirects when enabled (disabled by default)")
     arguments = parser.parse_args()
 
     if (arguments.details_name or arguments.details_ext or arguments.details_risk) and not arguments.details:
@@ -48,6 +49,7 @@ def main():
     clone_tree = arguments.clone_tree
     output_file = arguments.output_file
     emojis = arguments.emojis
+    allow_redirect = arguments.allow_redirect
 
     run(url, 
         tree, 
@@ -58,6 +60,7 @@ def main():
         details_ext,
         details_risk,
         emojis,
+        allow_redirect,
         )
 
 

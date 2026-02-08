@@ -6,9 +6,9 @@ processing steps.
 
 import requests
 
-def check_status_code(url):
+def check_status_code(url, allow_redirect):
     try:
-        response = requests.head(url, timeout=5, allow_redirects=True)
+        response = requests.head(url, timeout=5, allow_redirects=allow_redirect)
         return response.status_code < 400, response.status_code
     
     except requests.exceptions.RequestException:

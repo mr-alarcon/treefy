@@ -18,7 +18,7 @@ def create_base_path(url, root_path):
 
 
 
-def tree_cloner(tree_structure, base_path):
+def tree_cloner(tree_structure, base_path, allow_redirect):
     for name, content in tree_structure.items():
         safe_name = Path(name).name
         path = base_path / safe_name
@@ -31,7 +31,7 @@ def tree_cloner(tree_structure, base_path):
             path.parent.mkdir(parents=True, exist_ok=True)
 
             try:
-                response = requests.get(content, timeout=10)
+                response = requests.get(content, timeout=10, allow_redirects=allow_redirect)
                 response.raise_for_status()
                 path.write_bytes(response.content)
             except Exception as e:
