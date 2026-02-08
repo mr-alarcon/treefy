@@ -17,11 +17,11 @@ from features.file_details import file_details
 from output.tree_printer import print_tree
 from output.files_details_printer import print_file_details
 
-def run(url, tree, clone_tree, output_file, details, details_name, details_ext, details_risk, emojis, allow_redirect):
-    status, code = check_status_code(url, allow_redirect)
+def run(url, tree, clone_tree, output_file, details, details_name, details_ext, details_risk, emojis, allow_redirect, verify_cert):
+    status, code = check_status_code(url, allow_redirect, verify_cert)
 
     if status:
-        urls_found = extract_urls(url, allow_redirect)
+        urls_found = extract_urls(url, allow_redirect, verify_cert)
         urls_filtered = filter_urls(urls_found)
         urls_normalized = normalize_urls(url, urls_filtered)
         urls_deduplicated = deduplicate_urls(urls_normalized)
@@ -48,7 +48,7 @@ def run(url, tree, clone_tree, output_file, details, details_name, details_ext, 
 
     if clone_tree:
         base_path = create_base_path(url, clone_tree)
-        tree_cloner(tree_structure, base_path, allow_redirect)
+        tree_cloner(tree_structure, base_path, allow_redirect, verify_cert)
 
     if details:
         files_details = file_details(files_urls)
