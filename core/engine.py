@@ -14,11 +14,12 @@ from features.tree_builder import tree_builder, add_files_to_tree
 from features.tree_cloner import create_base_path, tree_cloner
 from features.output_file import save_output_file
 from features.file_details import file_details
+from features.source_scanner import source_scanner
 
 from output.tree_printer import print_tree
 from output.files_details_printer import print_file_details
 
-def run(url, tree, clone_tree, output_file, details, details_name, details_ext, details_risk, emojis, allow_redirect, verify_cert):
+def run(url, tree, clone_tree, output_file, scan_patterns, details, details_name, details_ext, details_risk, emojis, allow_redirect, verify_cert):
 
     if not verify_cert:
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -54,6 +55,9 @@ def run(url, tree, clone_tree, output_file, details, details_name, details_ext, 
     if clone_tree:
         base_path = create_base_path(url, clone_tree)
         tree_cloner(tree_structure, base_path, allow_redirect, verify_cert)
+
+    if scan_patterns:
+        source_scanner(files_urls)
 
     if details:
         files_details = file_details(files_urls)

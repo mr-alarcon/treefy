@@ -25,7 +25,7 @@ def tree_cloner(tree_structure, base_path, allow_redirect, verify_cert):
 
         if isinstance(content, dict):
             path.mkdir(parents=True, exist_ok=True)
-            tree_cloner(content, path)
+            tree_cloner(content, path, allow_redirect, verify_cert)
 
         elif isinstance(content, str):
             path.parent.mkdir(parents=True, exist_ok=True)

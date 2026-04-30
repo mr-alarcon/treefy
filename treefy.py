@@ -17,6 +17,7 @@ def build_parser():
     parser_arguments.add_argument("-h", "--help", action="help", help="Show this help message")
     parser_arguments.add_argument("-u", "--url", metavar="URL", required=True, help="Target URL")
     parser_arguments.add_argument("-t", "--tree", action="store_true", help="Show directory tree")
+    parser_arguments.add_argument("-p", "--scan-patterns", action="store_true", help="Detect potentially sensitive patterns in discovered source code")
     parser_arguments.add_argument("-d", "--details", action="store_true", help="Show details for discovered files")
     parser_arguments.add_argument("--details-name", nargs="?", metavar="NAME", help="Filter detailed output by file name")
     parser_arguments.add_argument("--details-ext", nargs="?", metavar="EXT", help="Filter detailed output by file extension")
@@ -47,6 +48,7 @@ def main():
         arguments.tree, 
         arguments.clone_tree, 
         arguments.output_file,
+        arguments.scan_patterns,
         arguments.details,
         arguments.details_name,
         arguments.details_ext,
