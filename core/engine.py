@@ -3,6 +3,7 @@ This module coordinates the main execution flow of the application
 """
 
 import sys
+import urllib3
 
 from core.target_status import check_status_code
 from discovery.urls import extract_urls, filter_urls, normalize_urls, deduplicate_urls
@@ -18,6 +19,10 @@ from output.tree_printer import print_tree
 from output.files_details_printer import print_file_details
 
 def run(url, tree, clone_tree, output_file, details, details_name, details_ext, details_risk, emojis, allow_redirect, verify_cert):
+
+    if not verify_cert:
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
     status, code = check_status_code(url, allow_redirect, verify_cert)
 
     if status:
