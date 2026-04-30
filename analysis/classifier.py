@@ -3,7 +3,7 @@ URL analysis utilities for classifying discovered URLs by type and domain.
 """
 
 import os
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 
 def get_base_url(url_target):
     parsed = urlparse(url_target)
@@ -33,6 +33,17 @@ def derive_directories_from_files(file_urls):
     return derived_dirs
 
 
+
+def clean_url(url):
+    parsed = urlparse(url)
+    return urlunparse((
+        parsed.scheme,
+        parsed.netloc,
+        parsed.path,
+        "",  # params
+        "",  # query ❌ eliminado
+        ""   # fragment ❌ eliminado
+    ))
 def classifier_urls(url_target, urls):
     """
     Classify URLs relative to a target domain into files, directories,
@@ -46,6 +57,8 @@ def classifier_urls(url_target, urls):
     base_domain = get_domain(url_target)
 
     for url in urls:
+        url = clean_url(url)
+        
         domain = get_domain(url)
 
         if domain == "" or domain == base_domain:
